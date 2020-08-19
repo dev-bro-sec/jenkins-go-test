@@ -26,7 +26,6 @@ pipeline {
 
         stage('Test') {
             steps {
-              
                     echo 'Running test'
                     sh 'pwd'
                     sh 'go test -v'
