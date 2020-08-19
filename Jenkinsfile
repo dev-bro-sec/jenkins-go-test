@@ -26,7 +26,7 @@ pipeline {
 
         stage('Test') {
             steps {
-                withEnv(["PATH+GO=${GOPATH}/"]){
+                withEnv(["PATH+GO=${GOPATH}/bin"]){
                     echo 'Running linting'
                     sh 'golint .'
                     echo 'Running test'
