@@ -30,7 +30,8 @@ pipeline {
                     echo 'Running linting'
                     sh 'golint .'
                     echo 'Running test'
-                    sh 'cd test && go test -v'
+                    echo 'pwd'
+                    sh 'go test -v'
                 }
             }
         }
