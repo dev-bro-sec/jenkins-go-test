@@ -6,7 +6,8 @@ pipeline {
     environment {
         GO114MODULE = 'on'
         CGO_ENABLED = 0 
-        GOPATH = "${JENKINS_HOME}/terraform/test/"
+        GOPATH = "${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_ID}"
+
     }
     stages {        
         stage('Pre Test') {
@@ -26,8 +27,11 @@ pipeline {
 
         stage('Test') {
             steps {
-                    sh 'go get -u github.com/gruntwork-io/terratest/modules/http-helper'
-                    sh 'cd "${JENKINS_HOME}"/terraform/test/ && go test -v hello_world_app_unit_test.go'             
+                withEnv(["PATH+GO=${GOPATH}/bin"]){
+                    // sh 'go get -u github.com/gruntwork-io/terratest/modules/http-helper'
+                    sh 'cd "${JENKINS_HOME}"/terraform/test/ && go test -v hello_world_app_unit_test.go'
+
+                }
             }
         }
         
