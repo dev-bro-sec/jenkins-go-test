@@ -29,7 +29,7 @@ pipeline {
             steps {
                 withEnv(["PATH+GO=${GOPATH}/bin"]){
                     sh 'go get -u github.com/gruntwork-io/terratest/modules/http-helper'
-                       'go get -u golang.org/x/crypto/ssh'
+                    sh 'go get -u golang.org/x/crypto/ssh'
                     sh 'cd "${JENKINS_HOME}"/terraform/test/ && go test -v hello_world_app_unit_test.go'
 
                 }
