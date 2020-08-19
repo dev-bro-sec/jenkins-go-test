@@ -26,7 +26,7 @@ pipeline {
 
         stage('Test') {
             steps {
-                    sh 'curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh'
+                    sh 'go get -u github.com/gruntwork-io/terratest/modules/http-helper'
                     sh 'cd "${JENKINS_HOME}"/terraform/test/ && go test -v hello_world_app_unit_test.go'             
             }
         }
