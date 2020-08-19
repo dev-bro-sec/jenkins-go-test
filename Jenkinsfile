@@ -26,7 +26,7 @@ pipeline {
 
         stage('Test') {
             steps {
-                    sh 'cd "${JENKINS_HOME}"/terraform/test/ && go test -v'             
+                    sh 'cd "${JENKINS_HOME}"/terraform/test/ && dep ensure && go test -v'             
             }
         }
         
