@@ -26,10 +26,7 @@ pipeline {
 
         stage('Test') {
             steps {
-                    sh 'cd "${JENKINS_HOME}"/terraform/test/'             
-                    echo 'Running test'
-                    sh 'pwd'
-                    sh 'go test -v'
+                    sh 'cd "${JENKINS_HOME}"/terraform/test/ && go test -v'             
             }
         }
         
