@@ -13,16 +13,17 @@ pipeline {
             steps {
                 echo 'Installing dependencies'
                 sh 'go version'
+                sg " echo '${JENKINS_HOME}'"
                 sh 'go get -u golang.org/x/lint/golint'
             }
         }
         
-        stage('Build') {
-            steps {
-                echo 'Compiling and building'
-                sh 'go build'
-            }
-        }
+        // stage('Build') {
+        //     steps {
+        //         echo 'Compiling and building'
+        //         sh 'go build'
+        //     }
+        // }
 
         stage('Test') {
             steps {
@@ -38,13 +39,13 @@ pipeline {
         }
         
     }
-    post {
-        always {
-            emailext body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}",
-                recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],
-                to: "${params.RECIPIENTS}",
-                subject: "Jenkins Build ${currentBuild.currentResult}: Job ${env.JOB_NAME}"
+    // post {
+    //     always {
+    //         emailext body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}",
+    //             recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],
+    //             to: "${params.RECIPIENTS}",
+    //             subject: "Jenkins Build ${currentBuild.currentResult}: Job ${env.JOB_NAME}"
             
-        }
-    }  
+    //     }
+    // }  
 }
