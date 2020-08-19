@@ -13,7 +13,7 @@ pipeline {
             steps {
                 echo 'Installing dependencies'
                 sh 'go version'
-                sg " echo '${JENKINS_HOME}'"
+                sh " echo '${JENKINS_HOME}'"
                 sh 'go get -u golang.org/x/lint/golint'
             }
         }
