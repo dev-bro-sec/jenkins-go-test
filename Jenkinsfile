@@ -6,14 +6,13 @@ pipeline {
     environment {
         GO114MODULE = 'on'
         CGO_ENABLED = 0 
-        GOPATH = "${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_ID}"
+        GOPATH = "${JENKINS_HOME}/terraform/test/"
     }
     stages {        
         stage('Pre Test') {
             steps {
                 echo 'Installing dependencies'
                 sh 'go version'
-                sh " echo '${JENKINS_HOME}'"
                 sh 'go get -u golang.org/x/lint/golint'
             }
         }
@@ -27,9 +26,7 @@ pipeline {
 
         stage('Test') {
             steps {
-                withEnv(["PATH+GO=${GOPATH}/bin"]){
-                    echo 'Running vetting'
-                    sh 'go vet .'
+                withEnv(["PATH+GO=${GOPATH}"]){
                     echo 'Running linting'
                     sh 'golint .'
                     echo 'Running test'
